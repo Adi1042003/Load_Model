@@ -339,6 +339,7 @@ void checkUnderload(float weight,float thresholdWeight) {
     // Underload condition is not met
     digitalWrite(LED_PIN, LOW);  // Turn off the LED
     Blynk.virtualWrite(V6, 0);  // Clear underload alert in Blynk app (virtual pin V6)
+    uweight = 0; //if value goes above threshold value
   }
 }
 
