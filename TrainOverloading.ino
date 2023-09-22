@@ -39,7 +39,7 @@ bool reset_provisioned = true; //make this true if u want to change wifi ssid an
 float calibration_factor = -96650;
 
 // Initialize Telegram BOT
-#define BOTtoken "6616164017:AAGWiCORRQJghTEd2ZCoEgFFFVDczD3F8WE"
+#define BOTtoken "Add_BOTtoken"
 #define CHAT_ID "@ScaleMasterBot"
 
 WiFiClientSecure client;
