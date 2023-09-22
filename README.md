@@ -1,9 +1,6 @@
 # ScaleBot - IoT Weight Monitoring System
 
-![ScaleBot Logo](http://drive.google.com/uc?export=view&id=1qEgtSW4vrtDINCftU76MzR5Bn7Jsw0me)
-
-#Telegram Bot :-
-![TeleScaleBot](https://web.telegram.org/a/#6616164017)
+[![ScaleBot Logo](http://drive.google.com/uc?export=view&id=1qEgtSW4vrtDINCftU76MzR5Bn7Jsw0me)](https://web.telegram.org/a/#6616164017)
 
 ScaleBot is an Internet of Things (IoT) weight monitoring system built with an ESP32, load cell, and various sensors. This project allows you to monitor weight measurements remotely using Blynk and receive alerts through Telegram.
 
