@@ -56,6 +56,7 @@ bool prevScaleState = false;  // Previous scale state
 
 float thresholdWeight = 10.0;  // Default threshold weight in kg
 float weight = 0.0;
+float uweight=thresholdWeight;
 
 void SysProvEvent(arduino_event_t *sys_event)
 {
@@ -118,7 +119,8 @@ void handleTelegramMessages() {
       else if (text == "/status") {
         String statusMessage = "Scale is " + String(isScaleOn ? "ON" : "OFF") + "\n";      
         statusMessage += "Current Weight: " + String(weight, 3) + " kg\n";
-        statusMessage += "Current threshold: " + String(thresholdWeight) + " kg";
+        statusMessage += "Current threshold: " + String(thresholdWeight) + " kg\n";
+        statusMessage += "Currently UnderWeight By: " + String(uweight, 3) + " kg\n";
         bot.sendMessage(chat_id, statusMessage);
         Serial.println(statusMessage);
       }
@@ -326,7 +328,7 @@ BLYNK_WRITE(V4) {
 void checkUnderload(float weight,float thresholdWeight) {
   if (weight < thresholdWeight) {
     // Underload condition is met
-    float uweight = thresholdWeight - weight;
+    uweight = thresholdWeight - weight;
     Serial.print("Underweight by or the remaining capacity to fill: ");
     Serial.print(uweight);
     Serial.println(" kg");
