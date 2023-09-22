@@ -17,13 +17,13 @@ LiquidCrystal_I2C lcd(0x27, 16, 2);  // Set the LCD address and dimensions (chan
 
 HX711 scale;
 
-const char* BLYNK_TEMPLATE_ID = "TMPL3UWKXwkbf";
-const char* BLYNK_TEMPLATE_NAME = "load cell";
+const char* BLYNK_TEMPLATE_ID = "AddYourTemplateId";
+const char* BLYNK_TEMPLATE_NAME = "AddYourTemplateName";
 
-char auth[] = "KYY7zrOb7PaI99joDJ3v2qqt8BeKOCj_";  // Blynk authentication token
+char auth[] = "Add_Your_Blynk_Authentication_Token";  // Blynk authentication token
 // Define global variables to store SSID and password
-char ssid[20]="OnePlus";      
-char password[20]="8431748007";  
+char ssid[20]="Wifi_Name";      
+char password[20]="Wifi_Password";  
 
 //use this if u don't want default values i.e shown above but make sure to comment the below 2 lines
 // char ssid[32];      
