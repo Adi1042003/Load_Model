@@ -14,16 +14,17 @@ LiquidCrystal_I2C lcd(0x27, 16, 2);  // Set the LCD address and dimensions (chan
 #define CLK  33
 #define BUTTON_PIN 13
 #define BUZZER_PIN 12
+#define LED_PIN 14
 
 HX711 scale;
 
-const char* BLYNK_TEMPLATE_ID = "AddYourTemplateId";
-const char* BLYNK_TEMPLATE_NAME = "AddYourTemplateName";
+const char* BLYNK_TEMPLATE_ID = "TMPL3UWKXwkbf";
+const char* BLYNK_TEMPLATE_NAME = "load cell";
 
-char auth[] = "Add_Your_Blynk_Authentication_Token";  // Blynk authentication token
+char auth[] = "KYY7zrOb7PaI99joDJ3v2qqt8BeKOCj_";  // Blynk authentication token
 // Define global variables to store SSID and password
-char ssid[20]="Wifi_Name";      
-char password[20]="Wifi_Password";  
+char ssid[20]="OnePlus";      
+char password[20]="8431748007";  
 
 //use this if u don't want default values i.e shown above but make sure to comment the below 2 lines
 // char ssid[32];      
@@ -39,7 +40,7 @@ bool reset_provisioned = true; //make this true if u want to change wifi ssid an
 float calibration_factor = -96650;
 
 // Initialize Telegram BOT
-#define BOTtoken "Add_BOTtoken"
+#define BOTtoken "6616164017:AAGWiCORRQJghTEd2ZCoEgFFFVDczD3F8WE"
 #define CHAT_ID "@ScaleMasterBot"
 
 WiFiClientSecure client;
@@ -264,6 +265,7 @@ void myTimer() {
     Serial.print(weight, 3);
     Serial.println(" kg");
     checkThreshold(weight);  // Check if weight exceeds the threshold
+    checkUnderload(weight,thresholdWeight);  // Check for underload condition
 
     // Update LCD display
     lcd.setCursor(0, 0);
@@ -320,3 +322,21 @@ BLYNK_WRITE(V4) {
   lcd.print(thresholdWeight);
   lcd.print(" kg");
 }
+// Update LCD display with new underweight weight
+void checkUnderload(float weight,float thresholdWeight) {
+  if (weight < thresholdWeight) {
+    // Underload condition is met
+    float uweight = thresholdWeight - weight;
+    Serial.print("Underweight by or the remaining capacity to fill: ");
+    Serial.print(uweight);
+    Serial.println(" kg");
+    digitalWrite(LED_PIN, HIGH);  // Turn on the LED
+    Blynk.virtualWrite(V6, 1);  // Send underload alert to Blynk app (virtual pin V6)
+    Blynk.logEvent("alert", "Underload detected");
+  } else {
+    // Underload condition is not met
+    digitalWrite(LED_PIN, LOW);  // Turn off the LED
+    Blynk.virtualWrite(V6, 0);  // Clear underload alert in Blynk app (virtual pin V6)
+  }
+}
+
