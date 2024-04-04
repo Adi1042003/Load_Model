@@ -25,3 +25,5 @@ ScaleBot is an Internet of Things (IoT) weight monitoring system built with an E
 
    ```bash
    git clone https://github.com/Adi1042003/Load_Model.git
+
+   
